@@ -1,4 +1,4 @@
-import Header from "../components/home/header";
+import Header from "../components/header";
 import Search from "../components/home/search";
 import Products from "../components/home/products";
 import Shortcuts from "../components/home/shortcuts";
