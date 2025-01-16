@@ -25,7 +25,7 @@ function ProductBox({img, name, description, price}){
                     alt="ícone de coração para favoritos"
                     className="w-[40px] cursor-pointer"/>
                     <img src={whatsAppIcon}
-                    alt="Ícone do whatsapp"
+                    alt="Ícone do whatsapp(telefone com fundo verde)"
                     className="w-[40px] cursor-pointer"/>
                 </div>
             </div>
