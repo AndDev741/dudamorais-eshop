@@ -1,9 +1,14 @@
-export default function PasswordInput(){
+export default function PasswordInput({password, setPassword}){
     return (
 
-        <label className="flex flex-col items-center text-xl">
+        <label htmlFor="password" className="flex flex-col items-center text-xl">
             Senha:
-            <input type="password"
+            <input 
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            type="password"
+            name="password"
+            id="password"
              className="border-2 border-mainColor rounded-md pl-1"/>
         </label>
     )
