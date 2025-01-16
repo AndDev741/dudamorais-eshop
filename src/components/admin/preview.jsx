@@ -18,7 +18,8 @@ const half = Math.floor((Number(price) / 2 * 100)) / 100
                         <h4 className="text-2xl mt-2">R${price}</h4>
                         <p className="text-gray-500">2x de R${half}</p>
                     </div>
-                    <img src={favoriteIcon}
+                    <img alt="ícone de coração para favoritos"
+                    src={favoriteIcon}
                     className="w-[50px] cursor-pointer" />
                 </div>
             </div>

@@ -23,6 +23,7 @@ export default function Login(){
         <div className="flex flex-col justify-between items-center h-full">
             <header className="flex items-center justify-center">
                 <img src={logo}
+                alt="borboleta com frase duda morais"
                 className="w-[350px]"/>
             </header>
             <main >

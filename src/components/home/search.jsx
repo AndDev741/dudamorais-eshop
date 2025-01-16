@@ -7,6 +7,7 @@ function Search(){
                 className="ml-2 outline-none w-[100%]"
             />
             <img src={searchIcon} 
+            alt="ícone de lupa para pesquisa"
             className="mr-2"
             />
         </div>

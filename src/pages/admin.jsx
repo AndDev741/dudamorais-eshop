@@ -4,7 +4,6 @@ import DescriptionInput from "../components/admin/descriptionInput";
 import TypesRender from "../components/admin/typesRender";
 import SizeRender from "../components/admin/SizeRender";
 import Preview from "../components/admin/preview";
-import favoriteIcon from "../assets/favorite.svg"
 import verifyAuthentication from "../services/verifyAuth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";

@@ -22,8 +22,10 @@ function ProductBox({img, name, description, price}){
                 
                 <div className="flex flex-col justify-between">
                     <img src={favoriteIcon}
+                    alt="ícone de coração para favoritos"
                     className="w-[40px] cursor-pointer"/>
                     <img src={whatsAppIcon}
+                    alt="Ícone do whatsapp"
                     className="w-[40px] cursor-pointer"/>
                 </div>
             </div>
