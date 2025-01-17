@@ -1,13 +1,37 @@
+import { useEffect } from "react";
+import getTypes from "../../services/product/getTypes";
 import NewTypeBox from "./NewTypeBox";
 import TypeBox from "./typeBox";
 
-function TypesRender(){
+
+function TypesRender({types, setTypes, userId, selectedType, setSelectedType}){
+    
+    useEffect(() => {
+        async function getData(){
+            const response = await getTypes(userId);
+            if(response){
+                setTypes(response);
+            }
+        }
+        getData();
+    }, [userId, setTypes])
+
+
     return(
-        <div className="flex flex-col items-center overflow-x-auto w-full mt-2">
+        <div className="flex flex-col items-start overflow-x-auto w-full mt-2">
             <div className="flex items-center justify-evenly">
-                <TypeBox name={"Short"}/>
-                <TypeBox name={"Calça"}/>
-                <NewTypeBox />
+            {types?.length >= 0
+            ? types.map((type) => (
+                <TypeBox name={type.name} 
+                id={type.id} 
+                selectedType={selectedType} 
+                setSelectedType={setSelectedType} 
+                setTypes={setTypes}
+                userId={userId}/>
+            )) : 
+            (<h1>Crie tipos para vincular em um produto!</h1>)}
+                
+                <NewTypeBox setTypes={setTypes} userId={userId} />
             </div>
         </div>
     )
