@@ -13,6 +13,7 @@ export default function Login(){
         e.preventDefault();
         const response = await makeLogin(username, password);
         if(response?.success){
+            localStorage.setItem("userId", response.success);
             navigate("/admin")
         }else{
             alert("Erro ao fazer login")
