@@ -22,7 +22,8 @@ function TypesRender({types, setTypes, userId, selectedType, setSelectedType}){
             <div className="flex items-center justify-evenly">
             {types?.length >= 0
             ? types.map((type) => (
-                <TypeBox name={type.name} 
+                <TypeBox key={type.id}
+                name={type.name} 
                 id={type.id} 
                 selectedType={selectedType} 
                 setSelectedType={setSelectedType} 

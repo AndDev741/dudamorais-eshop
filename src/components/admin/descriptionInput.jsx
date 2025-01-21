@@ -1,4 +1,4 @@
-function DescriptionInput({name, type, placeholder}){
+function DescriptionInput({name, type, placeholder, data, setData}){
     return(
         <div className="flex flex-col">
             <label htmlFor={name}
@@ -6,7 +6,9 @@ function DescriptionInput({name, type, placeholder}){
 
             <textarea id={name} name={name}
             type={type}
-            placeholder={`Sem cinto`}
+            placeholder={placeholder}
+            value={data}
+            onChange={(e) => setData(e.target.value)}
             className="border-2 border-mainColor rounded-md mt-1 pl-2 min-h-[102px]"/>
         </div>
     )
