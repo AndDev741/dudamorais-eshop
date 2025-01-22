@@ -2,33 +2,22 @@ import ProductBox from "./productBox";
 import exampleImg1 from '../../assets/exampleImg.jpeg';
 import exampleImg2 from '../../assets/exampleImg2.png';
 
-function Products(){
+function Products({products}){
+
     return(
         <div>
             <p className="text-center text-mainColor">+ Clique nas imagens para ver mais detalhes e fotos</p>
             <div className="flex flex-wrap justify-between w-full">
-                <div className="">
-                <ProductBox
-                img={exampleImg1}
-                name={"Short Jeans"}
-                description={"Sem elastano"}
-                price={"69.99"}/>
-                </div>
-                <div className="">
-                <ProductBox
-                img={exampleImg2}
-                name={"Short Jeans"}
-                description={"Sem elastano"}
-                price={"69.99"}/>
-                </div>
-
-                <div className="">
-                <ProductBox
-                img={exampleImg1}
-                name={"Short Jeans"}
-                description={"Sem elastano"}
-                price={"69.99"}/>
-                </div>
+                {products?.length > 0 ? products.map(product => (
+                    <ProductBox key={product.id}
+                    mainPicture={product.mainPictureUrl}
+                    othersPictures={product.otherPicturesUrl}
+                    name={product.name}
+                    description={product.description}
+                    price={product.price}
+                    sizesAndQuantities={product.sizeAndQuantity}
+                    />
+                )) : <h1 className="text-2xl text-center">Sem produtos cadastrados no momento!</h1>}
 
             </div>
         </div>
