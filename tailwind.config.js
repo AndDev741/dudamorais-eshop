@@ -17,6 +17,20 @@ module.exports = {
       },
       fontFamily: {
         mainFont: "Inter, sans-serif"
+      },
+      keyframes: {
+        slideBorder: {
+          '0%': {width: '0%'},
+          "100%": {width: '100%'},
+        },
+        fadeIn: {
+          '0%': { opacity: '0'},
+          '100%': {opacity: '1'}
+        }
+      },
+      animation: {
+        slideBorder: 'slideBorder 0.5s ease-in-out forwards',
+        fadeIn: "fadeIn 1s ease-in-out forwards"
       }
     },
   },
