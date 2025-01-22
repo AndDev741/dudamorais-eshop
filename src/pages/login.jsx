@@ -8,15 +8,24 @@ import {useNavigate} from "react-router-dom";
 export default function Login(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const navigate = useNavigate();
     const loginFormHandle = async (e) => {
         e.preventDefault();
+        setError("");
+
         const response = await makeLogin(username, password);
+        
         if(response?.success){
             localStorage.setItem("userId", response.success);
             navigate("/admin")
         }else{
-            alert("Erro ao fazer login")
+            if(response?.error){
+                setError("Usuário ou senha incorretos");
+            }else{
+                alert("Erro ao fazer login")
+            }
+            
         }
     }
 
@@ -39,6 +48,7 @@ export default function Login(){
                         value={'Entrar'}
                         className="border-2 bg-mainColor rounded-md px-5 py-2 text-white text-xl mt-4 cursor-pointer hover:scale-105" />
                     </div>
+                    <p className="text-xl text-red-500">{error}</p>
                 </form>
             </main>
         </div>

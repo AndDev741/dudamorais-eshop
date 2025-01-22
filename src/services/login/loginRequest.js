@@ -10,6 +10,9 @@ async function makeLogin(username, password){
         return response.data
     }catch(error){
         console.error(error);
+        if(error?.response){
+            return error.response.data;
+        }
     }
 }
 
