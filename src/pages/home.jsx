@@ -2,8 +2,22 @@ import Header from "../components/header";
 import Search from "../components/home/search";
 import Products from "../components/home/products";
 import Shortcuts from "../components/home/shortcuts";
+import getProducts from "../services/product/getProduct";
+import { useEffect, useState } from "react";
+
 
 function Home(){
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const getData = async () => {
+            const response = await getProducts();
+            setProducts(response);
+        }
+
+        getData();
+    }, [setProducts]);
+
     return(
         <>
             <Header/>
@@ -14,7 +28,7 @@ function Home(){
                 <Shortcuts/>
             </div>
             <div className="flex justify-center mt-4">
-                <Products/>
+                <Products products={products}/>
             </div>
         </>
     )
