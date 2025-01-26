@@ -17,9 +17,11 @@ function ProductBox({mainPicture, othersPictures, name, description, price, size
         const urls = [];
 
         urls.push(mainPicture);
-        othersPictures.map((picture) => {
-            urls.push(picture);
-        });
+        if(othersPictures !== null){
+            othersPictures.map((picture) => {
+                urls.push(picture);
+            });
+        }
 
         setPicturesList(urls);
         setFilesLength(urls.length)
