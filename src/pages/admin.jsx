@@ -10,20 +10,27 @@ import { useNavigate } from "react-router";
 import axiosWithCredentials from "../services/axiosConfig";
 import axios from "axios";
 import createProduct from "../services/product/createProduct";
+import YourProducts from "../components/admin/yourProducts";
+import getProducts from "../services/product/getProduct";
 
 function Admin(){
     const navigate = useNavigate();
+    const [products, setProducts] = useState([]);
     useEffect(() =>{
         async function verifyAuth(){
             const authenticated = await verifyAuthentication();
             if(!authenticated?.success){
                 navigate("/login");
+            }else{
+                const response = await getProducts();
+                setProducts(response)
             }
         }
         verifyAuth();
-    })
+    }, [setProducts, navigate])
 
     
+
     const userId = localStorage.getItem("userId");
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
@@ -32,12 +39,11 @@ function Admin(){
     const [sizesAndQuantities, setSizesAndQuantities] = useState([]);
     const [mainPicture, setMainPicture] = useState(null);
     const [othersPictures, setOthersPictures] = useState([]);
-    const [mainPictureUrl, setMainPictureUrl] = useState("");
-    const [othersPicturesUrl, setOthersPicturesUrl] = useState("");
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [types, setTypes] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const uploadImagesToCloud = async (mainPicture, othersPictures) => {
         if(!mainPicture){
@@ -49,6 +55,7 @@ function Admin(){
             const fileName = encodeURIComponent(mainPicture.name);
             const response = await axiosWithCredentials.post("/product/generateS3Url", {fileName});
             const { presignedUrl, publicUrl } = response.data;
+            console.log(publicUrl)
 
             await axios.put(presignedUrl, mainPicture, {
                 headers: {
@@ -56,10 +63,8 @@ function Admin(){
                 },
             });
 
-            setMainPictureUrl(publicUrl); 
-
             if(!othersPictures.length > 0){
-                return;
+                return {mainPictureUrl: publicUrl, othersPicturesUrl: null};
             }
 
             const othersPictureUrl = [];
@@ -78,9 +83,11 @@ function Admin(){
 
                 othersPictureUrl.push(publicUrl);
             }
-            setOthersPicturesUrl(othersPictureUrl);
+            return {mainPictureUrl: publicUrl, othersPicturesUrl: othersPictureUrl}
         }catch(e){
             console.error(e);
+            setError("Erro ao fazer upload das imagens");
+            return null;
         }
         
         
@@ -90,8 +97,9 @@ function Admin(){
         e.preventDefault();
         setError("");
         setSuccess("");
+        setIsLoading(true);
 
-        await uploadImagesToCloud(mainPicture, othersPictures);
+        const {mainPictureUrl, othersPicturesUrl} = await uploadImagesToCloud(mainPicture, othersPictures);
 
         const response = await createProduct(userId, name, description, price, selectedType, sizesAndQuantities, mainPictureUrl, othersPicturesUrl);   
 
@@ -103,18 +111,20 @@ function Admin(){
             setPrice("");
             setSelectedType("");
             setSizesAndQuantities([]);
-            setMainPictureUrl("");
-            setOthersPicturesUrl([]);
-            setSuccess(response.success);
+            setSuccess("Produto criado com sucesso!");
+            const response = await getProducts();
+            setProducts(response)
         }
+        setIsLoading(false);
     }
 
     return(
         <>
             <Header/>
-            <h1 className="text-4xl font-semibold text-center">Criar Produto</h1>
+            <YourProducts products={products}/>
+            <h1 className="text-4xl font-semibold text-center mt-4">Criar Produto</h1>
             <form onSubmit={handleCreateProduct}
-            className="flex flex-col items-center justify-center mt-6 mb-12">
+            className="flex flex-col items-center justify-center mt-6 mb-4">
                 <div className="flex flex-wrap justify-evenly w-full">
                     <div className="flex flex-col">
                         <Input name={"Nome"}
@@ -201,6 +211,7 @@ function Admin(){
                 <input type="submit"
                 value={"Criar produto"}
                 className="bg-mainColor p-2 rounded-md text-white hover:scale-105 cursor-pointer" />
+                <h3 className={`${isLoading === true ? "text-2xl animate-pulse" : "hidden"}`}>Criando Produto...</h3>
 
             </form>
         </>
