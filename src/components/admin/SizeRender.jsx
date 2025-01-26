@@ -1,6 +1,7 @@
 import SizeBox from "./SizeBox";
 
 function SizeRender({sizesAndQuantities, setSizesAndQuantities}){
+    console.log(sizesAndQuantities)
     return(
         <div className="flex justify-evenly mt-3 w-full">
             <SizeBox size={36} sizesAndQuantities={sizesAndQuantities} setSizeAndQuantities={setSizesAndQuantities}/>

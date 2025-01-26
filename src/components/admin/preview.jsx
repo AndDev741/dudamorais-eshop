@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import rigthArrow from "../../assets/rightArrow.svg";
 import favoriteIcon from "../../assets/favorite.svg"
-export default function Preview({mainPicture, othersPictures, sizes, name, description, price}){
+export default function Preview({mainPictureUrl, othersPicturesUrl, mainPicture, othersPictures, sizes, name, description, price}){
 
 const half = Math.floor((Number(price) / 2 * 100)) / 100
     const getTotalQuantity = () => {
-        return sizes.reduce((total, item) => total + Number(item.quantity || 0), 0);
+        return sizes.reduce((total, item) => total + Number(item.quantity || item.quantities || 0), 0);
     };
 
     const [activeIndex, setActiveIndex] = useState(0);
@@ -14,6 +14,7 @@ const half = Math.floor((Number(price) / 2 * 100)) / 100
 
     useEffect(() => {
         if(mainPicture && othersPictures?.length > 0){
+            setActiveIndex(0)
             const files = [];
             files.push(URL.createObjectURL(mainPicture));
 
@@ -26,11 +27,23 @@ const half = Math.floor((Number(price) / 2 * 100)) / 100
             setPicturesList(files)
             setFilesLength(files.length);
         }else if(mainPicture){
+            setActiveIndex(0);
+            setFilesLength(0);
             const files = [];
             files.push(URL.createObjectURL(mainPicture));
             setPicturesList(files)
+        }else if(mainPictureUrl){
+            const picturesUrl = [];
+            picturesUrl.push(mainPictureUrl);
+
+            for(let i = 0; i < othersPicturesUrl.length; i++){
+                picturesUrl.push(othersPicturesUrl[i]);
+            }
+
+            setFilesLength(picturesUrl.length);
+            setPicturesList(picturesUrl)
         }
-    }, [mainPicture, othersPictures]);
+    }, [mainPicture, othersPictures, mainPictureUrl, othersPicturesUrl]);
 
     const nextPicture = () => {
         if(activeIndex === filesLength - 1 || activeIndex === filesLength){

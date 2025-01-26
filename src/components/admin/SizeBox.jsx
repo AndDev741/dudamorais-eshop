@@ -1,7 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function SizeBox({size, sizesAndQuantities ,setSizeAndQuantities}){
     const [quantity, setQuantity] = useState(null);
+
+    useEffect(() => {
+        sizesAndQuantities.map((sizeAndQuantity) => {
+            if(size === sizeAndQuantity.size){
+                setQuantity(sizeAndQuantity.quantity)
+            }
+        })
+    }, [size, sizesAndQuantities])
+
     const handleSize = (e) => {
         const newQuantity = Number(e.target.value);
         
@@ -17,8 +26,8 @@ function SizeBox({size, sizesAndQuantities ,setSizeAndQuantities}){
         };
 
         setSizeAndQuantities(updatedSizes); 
-              
     }
+    
     
     return(
         <div>
