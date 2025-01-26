@@ -41,7 +41,7 @@ export default function YourProducts({products}){
         const response = await deleteProduct(productId, picturesToDelete);
         
         if(response?.success){
-            //window.location.reload();
+            window.location.reload();
         }else{
             alert("Erro ao tentar deletar produto");
         }
