@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 
 function Home(){
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         const getData = async () => {
@@ -17,18 +19,17 @@ function Home(){
 
         getData();
     }, [setProducts]);
-
     return(
         <>
             <Header/>
             <div className="flex items-center justify-center">
-                <Search />
+                <Search search={search} setSearch={setSearch} products={products} setFilteredProducts={setFilteredProducts}/>
             </div>
             <div className="flex items-center justify-center mt-4">
                 <Shortcuts/>
             </div>
             <div className="flex justify-center mt-4">
-                <Products products={products}/>
+                <Products products={products} filteredProducts={filteredProducts}/>
             </div>
         </>
     )
