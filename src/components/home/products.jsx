@@ -1,6 +1,4 @@
 import ProductBox from "./productBox";
-import exampleImg1 from '../../assets/exampleImg.jpeg';
-import exampleImg2 from '../../assets/exampleImg2.png';
 
 function Products({products, filteredProducts}){
 

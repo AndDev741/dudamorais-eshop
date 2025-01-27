@@ -10,6 +10,7 @@ function Home(){
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [search, setSearch] = useState("");
+    const [types, setTypes] = useState([]);
 
     useEffect(() => {
         const getData = async () => {
@@ -26,7 +27,7 @@ function Home(){
                 <Search search={search} setSearch={setSearch} products={products} setFilteredProducts={setFilteredProducts}/>
             </div>
             <div className="flex items-center justify-center mt-4">
-                <Shortcuts/>
+                <Shortcuts types={types} setTypes={setTypes} setFilteredProducts={setFilteredProducts} products={products}/>
             </div>
             <div className="flex justify-center mt-4">
                 <Products products={products} filteredProducts={filteredProducts}/>

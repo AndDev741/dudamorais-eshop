@@ -8,7 +8,7 @@ function TypesRender({types, setTypes, userId, selectedType, setSelectedType}){
     
     useEffect(() => {
         async function getData(){
-            const response = await getTypes(userId);
+            const response = await getTypes();
             if(response){
                 setTypes(response);
             }
