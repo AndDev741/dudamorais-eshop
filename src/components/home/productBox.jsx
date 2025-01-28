@@ -55,15 +55,15 @@ function ProductBox({mainPicture, othersPictures, name, description, price, size
     }, [])
 
     return(
-        <div className={`${openModal ? "w-[80vw] border-[1px] border-mainColor rounded-md animate-slideBorder" 
-        : "w-[45vw]"} my-3 mx-2`}>
+        <div className={`${openModal ? "w-[80vw] md:max-w-[450px] border-[1px] border-mainColor rounded-md animate-slideBorder" 
+        : "w-[45vw] md:w-[300px]"} my-3 md:my-4 mx-2 md:h-full`}>
 
             <div className="flex flex-col">
                 <div className="flex items-center">
                     <img onClick={() => setOpenModal(!openModal)}
                     src={picturesList[activeIndex]}
                     alt="foto do produto"
-                    className={`${openModal ? "min-w-[50vw]" : "min-w-[45vw]"} max-h-[300px] rounded-t-md cursor-pointer`}/>
+                    className={`${openModal ? "min-w-[50vw] md:min-w-[250px]" : "min-w-[45vw] md:min-w-[300px] md:max-w-[300px]"} max-h-[300px] rounded-t-md cursor-pointer`}/>
 
                     <div className={`${openModal ? "w-[50%]" : "hidden"}`}>
                         <img  src={rigthArrow}
@@ -94,7 +94,7 @@ function ProductBox({mainPicture, othersPictures, name, description, price, size
                     </div>
                 </div>
 
-                <div className={`${openModal ? "" : "border-solid border-[1px] border-mainColor"} flex justify-between  w-[45vw] min-h-[100px] rounded-b-md p-2`}>
+                <div className={`${openModal ? "" : "border-solid border-[1px] border-mainColor"} flex justify-between  w-[45vw] md:min-w-[200px] md:max-w-[300px] min-h-[100px] rounded-b-md p-2`}>
                     <div className="">
                         <h2 className="font-medium text-lg leading-tight">{name}</h2>
                         <p className="font-light text-sm leading-tight">{description}</p>

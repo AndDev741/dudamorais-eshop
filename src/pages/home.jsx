@@ -29,7 +29,7 @@ function Home(){
             <div className="flex items-center justify-center mt-4">
                 <Shortcuts types={types} setTypes={setTypes} setFilteredProducts={setFilteredProducts} products={products}/>
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center mt-4 w-full">
                 <Products products={products} filteredProducts={filteredProducts}/>
             </div>
         </>

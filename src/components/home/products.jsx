@@ -3,9 +3,9 @@ import ProductBox from "./productBox";
 function Products({products, filteredProducts}){
 
     return(
-        <div>
+        <div className="w-full">
             <p className="text-center text-mainColor">+ Clique nas imagens para ver mais detalhes e fotos</p>
-            <div className="flex flex-wrap justify-between w-full">
+            <div className="flex flex-wrap justify-between md:justify-center w-full">
                 {filteredProducts?.length > 0 ? (
                     filteredProducts.map(product => (
                         <ProductBox key={product.id}
