@@ -14,7 +14,7 @@ function Shortcuts({types, setTypes, setFilteredProducts, products}){
     }, [setTypes]);                                    
     return(
         <div className="flex flex-wrap items-center justify-evenly w-full">
-            {types?.length > 0 ?
+            {types ?
             types.map((type, index) => (
                 <ShortcutBox name={type.name}
                 id={type.id} key={index}
